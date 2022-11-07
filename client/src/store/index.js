@@ -530,15 +530,19 @@ function GlobalStoreContextProvider(props) {
         tps.doTransaction();
     }
     store.canAddNewSong = function() {
+        if(store.currentModal !== CurrentModal.NONE) return false;
         return (store.currentList !== null);
     }
     store.canUndo = function() {
+        if(store.currentModal !== CurrentModal.NONE) return false;
         return ((store.currentList !== null) && tps.hasTransactionToUndo());
     }
     store.canRedo = function() {
+        if(store.currentModal !== CurrentModal.NONE) return false;
         return ((store.currentList !== null) && tps.hasTransactionToRedo());
     }
     store.canClose = function() {
+        if(store.currentModal !== CurrentModal.NONE) return false;
         return (store.currentList !== null);
     }
 
