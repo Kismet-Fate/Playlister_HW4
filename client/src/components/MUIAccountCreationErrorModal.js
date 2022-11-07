@@ -36,7 +36,9 @@ export default function MUIAccountCreationErrorModal() {
                 <Box sx={{ ...style, width: 500 }}>
                     <h2 id="child-modal-title">Error</h2>
                     <Alert severity='error'>{auth.err}</Alert>
+                    <Button onClick = {handleClose}>Close</Button>
                 </Box>
+                
                 
                 
             </Modal>
