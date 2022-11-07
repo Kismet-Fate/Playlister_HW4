@@ -10,6 +10,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    height: "200px",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -46,19 +47,24 @@ export default function MUIEditSongModal() {
     function handleUpdateYouTubeId(event) {
         setYouTubeId(event.target.value);
     }
-
+    const mystyle = {
+        width: "200px",
+        height: "200px",
+    }
     return (
-        <Modal
-            open={store.listMarkedForDeletion !== null}
+        <Modal 
+            open={store.currentSong !== null}
         >
             <Box sx={style}>
-            <div
+            <div 
             id="edit-song-modal"
             className="modal is-visible"
-            data-animation="slideInOutLeft">
+            data-animation="slideInOutLeft"
+            >
             <div
                 id='edit-song-root'
-                className="modal-root">
+                className="modal-root"
+                >
                 <div
                     id="edit-song-modal-header"
                     className="modal-north">Edit Song</div>

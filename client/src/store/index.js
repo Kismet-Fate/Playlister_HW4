@@ -358,6 +358,7 @@ function GlobalStoreContextProvider(props) {
         });  
     }
     store.showEditSongModal = (songIndex, songToEdit) => {
+        console.log("what");
         storeReducer({
             type: GlobalStoreActionType.EDIT_SONG,
             payload: {currentSongIndex: songIndex, currentSong: songToEdit}
