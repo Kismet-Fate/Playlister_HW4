@@ -30,7 +30,8 @@ export const GlobalStoreActionType = {
     SET_LIST_NAME_EDIT_ACTIVE: "SET_LIST_NAME_EDIT_ACTIVE",
     EDIT_SONG: "EDIT_SONG",
     REMOVE_SONG: "REMOVE_SONG",
-    HIDE_MODALS: "HIDE_MODALS"
+    HIDE_MODALS: "HIDE_MODALS",
+    ACCOUNT_CREATION_ERROR: "ACCOUNT_CREATION_ERROR"
 }
 
 // WE'LL NEED THIS TO PROCESS TRANSACTIONS
@@ -40,7 +41,8 @@ const CurrentModal = {
     NONE : "NONE",
     DELETE_LIST : "DELETE_LIST",
     EDIT_SONG : "EDIT_SONG",
-    REMOVE_SONG : "REMOVE_SONG"
+    REMOVE_SONG : "REMOVE_SONG",
+    ACCOUNT_CREATION_ERROR : "ACCOUNT_CREATION_ERROR"
 }
 
 // WITH THIS WE'RE MAKING OUR GLOBAL DATA STORE
@@ -71,6 +73,7 @@ function GlobalStoreContextProvider(props) {
     const storeReducer = (action) => {
         const { type, payload } = action;
         switch (type) {
+            
             // LIST UPDATE OF ITS NAME
             case GlobalStoreActionType.CHANGE_LIST_NAME: {
                 return setStore({
@@ -167,6 +170,19 @@ function GlobalStoreContextProvider(props) {
                     listNameActive: true,
                     listIdMarkedForDeletion: null,
                     listMarkedForDeletion: null
+                });
+            }
+            case GlobalStoreActionType.ACCOUNT_CREATION_ERROR: {
+                return setStore({
+                    currentModal : CurrentModal.ACCOUNT_CREATION_ERROR,
+                    idNamePairs: store.idNamePairs,
+                    currentList: store.currentList,
+                    currentSongIndex: store.currentSongIndex,
+                    currentSong: store.currentSong,
+                    newListCounter: store.newListCounter,
+                    listNameActive: store.listNameActive,
+                    listIdMarkedForDeletion: store.listIdMarkedForDeletion,
+                    listMarkedForDeletion: store.listMarkedForDeletion
                 });
             }
             // 
@@ -333,7 +349,12 @@ function GlobalStoreContextProvider(props) {
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
-
+    store.showAccountCreationErrorModal = (error) =>{
+        storeReducer({
+            type: GlobalStoreActionType.ACCOUNT_CREATION_ERROR,
+            payload: {error}
+        });  
+    }
     store.showEditSongModal = (songIndex, songToEdit) => {
         storeReducer({
             type: GlobalStoreActionType.EDIT_SONG,
@@ -360,6 +381,9 @@ function GlobalStoreContextProvider(props) {
     }
     store.isRemoveSongModalOpen = () => {
         return store.currentModal === CurrentModal.REMOVE_SONG;
+    }
+    store.isAccountCreationErrorModalOpen = () => {
+        return store.currentModal === CurrentModal.ACCOUNT_CREATION_ERROR;
     }
 
     // THE FOLLOWING 8 FUNCTIONS ARE FOR COORDINATING THE UPDATING
