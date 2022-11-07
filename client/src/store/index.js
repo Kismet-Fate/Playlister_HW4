@@ -520,6 +520,9 @@ function GlobalStoreContextProvider(props) {
         }
         asyncUpdateCurrentList();
     }
+    store.clearAllTransactions = function (){
+        tps.clearAllTransactions();
+    }
     store.undo = function () {
         tps.undoTransaction();
     }
