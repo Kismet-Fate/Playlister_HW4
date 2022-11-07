@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AuthContext from '../auth'
 
 import Copyright from './Copyright'
-
+import MUIAccountCreationErrorModal from './MUIAccountCreationErrorModal';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -111,6 +111,7 @@ export default function LoginScreen() {
                     </Box>
                 </Box>
             </Grid>
+            <MUIAccountCreationErrorModal />
         </Grid>
     );
 }

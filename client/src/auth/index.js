@@ -118,7 +118,7 @@ function AuthContextProvider(props) {
             */
         }
         catch (err) {
-            console.log(err);
+            
             auth.showErr(err.response.data.errorMessage);
         }
     }
@@ -137,7 +137,7 @@ function AuthContextProvider(props) {
             }
         }
         catch (err) {
-            auth.showErr(err.response.data.errorMessage)
+            auth.showErr(err.response.data.errorMessage);
         }
     }
 
